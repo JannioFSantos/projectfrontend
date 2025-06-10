@@ -9,20 +9,33 @@ const ProductViewPage = () => {
   const productImages = [
     { src: "/public/produc-image-1.jpeg" },
     { src: "/public/produc-image-2.jpeg" },
-    { src: "/public/produc-image-3.jpeg" }
+    { src: "/public/produc-image-3.jpeg" },
+    { src: "/public/produc-image-4.jpeg" },
+    { src: "/public/produc-image-5.jpeg" }
   ];
 
   const recommendedProducts = [
     {
-      name: "Produto Recomendado 1",
+      name: "Tênis Esportivo",
       image: "/public/product-thumb-1.jpeg",
       price: 199.90,
       priceDiscount: 149.90
     },
     {
-      name: "Produto Recomendado 2",
+      name: "Camiseta Básica",
       image: "/public/product-thumb-2.jpeg",
       price: 99.90
+    },
+    {
+      name: "Calça Jeans",
+      image: "/public/product-thumb-3.jpeg",
+      price: 159.90
+    },
+    {
+      name: "Moletom",
+      image: "/public/product-thumb-4.jpeg",
+      price: 129.90,
+      priceDiscount: 99.90
     }
   ];
 
