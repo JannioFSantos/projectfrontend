@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorias - Digital Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #ffffff;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #c2185b;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "📱";
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+            background: #f9fafb;
+        }
+
+        .search-input:focus {
+            border-color: #c2185b;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #6b7280;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-outline:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+
+        .btn-primary {
+            background: #c2185b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ad1457;
+        }
+
+        .cart-icon {
+            position: relative;
+            color: #6b7280;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #c2185b;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .nav {
+            background: white;
+            padding: 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 20px 30px;
+            text-decoration: none;
+            color: #6b7280;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: #c2185b;
+            border-bottom-color: #c2185b;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+
+        .page-description {
+            color: #6b7280;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Categories Section */
+        .categories-section {
+            padding: 80px 0;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c2185b, #ad1457);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-icon {
+            font-size: 80px;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .category-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+
+        .category-card p {
+            color: #6b7280;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .category-count {
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        /* Subcategories */
+        .subcategories-section {
+            background: #f8fafc;
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #111827;
+        }
+
+        .subcategories-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+        }
+
+        .subcategory-item {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .subcategory-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .subcategory-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .subcategory-name {
+            font-weight: 600;
+            color: #374151;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .subcategory-count {
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        /* Popular Categories */
+        .popular-section {
+            padding: 80px 0;
+        }
+
+        .popular-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .popular-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .popular-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .popular-image {
+            height: 200px;
+            background: linear-gradient(135deg, #f3e8ff 0%, #faf5ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .popular-info {
+            padding: 24px;
+        }
+
+        .popular-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #111827;
+            font-size: 18px;
+        }
+
+        .popular-description {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .popular-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-count {
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .trending-badge {
+            background: #10b981;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: #111827;
+            color: white;
+            padding: 80px 0 40px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 24px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            color: #9ca3af;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #c2185b;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            background: #374151;
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .subcategories-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .popular-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .search-container {
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 20px;
+            }
+
+            .categories-grid,
+            .subcategories-grid,
+            .popular-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Digital Store</a>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Pesquisar produto...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="btn btn-outline">Cadastre-se</a>
+                    <a href="#" class="btn btn-primary">Entrar</a>
+                    <div class="cart-icon">
+                        🛒
+                        <span class="cart-badge">2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="#" class="active">Categorias</a></li>
+                <li><a href="meus-pedidos.html">Meus Pedidos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Categorias</h1>
+            <p class="page-description">Explore nossa ampla variedade de produtos organizados por categorias para facilitar sua busca</p>
+        </div>
+    </section>
+
+    <!-- Main Categories -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="categories-grid">
+                <div class="category-card" onclick="goToCategory('tenis')">
+                    <span class="category-icon">👟</span>
+                    <div class="category-count">156 produtos</div>
+                    <h3>Tênis</h3>
+                    <p>Tênis esportivos, casuais e de corrida das melhores marcas</p>
+                    <a href="produtos.html" class="btn btn-primary">Ver Produtos</a>
+                </div>
+
+                <div class="category-card" onclick="goToCategory('camisetas')">
+                    <span class="category-icon">👕</span>
+                    <div class="category-count">89 produtos</div>
+                    <h3>Camisetas</h3>
+                    <p>Camisetas casuais, esportivas e de marca para todos os estilos</p>
+                    <a href="produtos.html" class="btn btn-primary">Ver Produtos</a>
+                </div>
+
+                <div class="category-card" onclick="goToCategory('calcas')">
+                    <span class="category-icon">👖</span>
+                    <div class="category-count">67 produtos</div>
+                    <h3>Calças</h3>
+                    <p>Calças jeans, sociais, esportivas e de diversos modelos</p>
+                    <a href="produtos.html" class="btn btn-primary">Ver Produtos</a>
+                </div>
+
+                <div class="category-card" onclick="goToCategory('bones')">
+                    <span class="category-icon">🧢</span>
+                    <div class="category-count">45 produtos</div>
+                    <h3>Bonés</h3>
+                    <p>Bonés esportivos, casuais e de marcas famosas</p>
+                    <a href="produtos.html" class="btn btn-primary">Ver Produtos</a>
+                </div>
+
+                <div class="category-card" onclick="goToCategory('headphones')">
+                    <span class="category-icon">🎧</span>
+                    <div class="category-count">32 produtos</div>
+                    <h3>Headphones</h3>
+                    <p>Fones de ouvido, headsets e equipamentos de áudio</p>
+                    <a href="produtos.html" class="btn btn-primary">Ver Produtos</a>
+                </div>
+
+                <div class="category-card" onclick="goToCategory('acessorios')">
+                    <span class="category-icon">⌚</span>
+                    <div class="category-count">78 produtos</div>
+                    <h3>Acessórios</h3>
+                    <p>Relógios, pulseiras, óculos e outros acessórios</p>
+                    <a href="produtos.html" class="btn btn-primary">Ver Produtos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subcategories -->
+    <section class="subcategories-section">
+        <div class="container">
+            <h2 class="section-title">Subcategorias Populares</h2>
+            <div class="subcategories-grid">
+                <div class="subcategory-item">
+                    <span class="subcategory-icon">🏃</span>
+                    <div class="subcategory-name">Tênis de Corrida</div>
+                    <div class="subcategory-count">45 produtos</div>
+                </div>
+
+                <div class="subcategory-item">
+                    <span class="subcategory-icon">🏀</span>
+                    <div class="subcategory-name">Tênis de Basquete</div>
+                    <div class="subcategory-count">32 produtos</div>
+                </div>
+
+                <div class="subcategory-item">
+                    <span class="subcategory-icon">👔</span>
+                    <div class="subcategory-name">Camisas Sociais</div>
+                    <div class="subcategory-count">28 produtos</div>
+                </div>
+
+                <div class="subcategory-item">
+                    <span class="subcategory-icon">🏋️</span>
+                    <div class="subcategory-name">Roupas de Academia</div>
+                    <div class="subcategory-count">56 produtos</div>
+                </div>
+
+                <div class="subcategory-item">
+                    <span class="subcategory-icon">🕶️</span>
+                    <div class="subcategory-name">Óculos de Sol</div>
+                    <div class="subcategory-count">23 produtos</div>
+                </div>
+
+                <div class="subcategory-item">
+                    <span class="subcategory-icon">🎒</span>
+                    <div class="subcategory-name">Mochilas</div>
+                    <div class="subcategory-count">34 produtos</div>
+                </div>
+
+                <div class="subcategory-item">
+                    <span class="subcategory-icon">👟</span>
+                    <div class="subcategory-name">Tênis Casuais</div>
+                    <div class="subcategory-count">67 produtos</div>
+                </div>
+
+                <div class="subcategory-item">
+                    <span class="subcategory-icon">🧥</span>
+                    <div class="subcategory-name">Jaquetas</div>
+                    <div class="subcategory-count">19 produtos</div>
+                </div>
+
+                <div class="subcategory-item">
+                    <span class="subcategory-icon">🩳</span>
+                    <div class="subcategory-name">Shorts</div>
+                    <div class="subcategory-count">41 produtos</div>
+                </div>
+
+                <div class="subcategory-item">
+                    <span class="subcategory-icon">🧦</span>
+                    <div class="subcategory-name">Meias</div>
+                    <div class="subcategory-count">52 produtos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Categories -->
+    <section class="popular-section">
+        <div class="container">
+            <h2 class="section-title">Categorias em Alta</h2>
+            <div class="popular-grid">
+                <div class="popular-card">
+                    <div class="popular-image">👟</div>
+                    <div class="popular-info">
+                        <div class="popular-name">Sneakers Premium</div>
+                        <div class="popular-description">Tênis de alta qualidade e design exclusivo</div>
+                        <div class="popular-stats">
+                            <span class="product-count">89 produtos</span>
+                            <span class="trending-badge">Em Alta</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popular-card">
+                    <div class="popular-image">🎧</div>
+                    <div class="popular-info">
+                        <div class="popular-name">Audio Premium</div>
+                        <div class="popular-description">Fones e equipamentos de áudio profissional</div>
+                        <div class="popular-stats">
+                            <span class="product-count">32 produtos</span>
+                            <span class="trending-badge">Novo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popular-card">
+                    <div class="popular-image">👕</div>
+                    <div class="popular-info">
+                        <div class="popular-name">Streetwear</div>
+                        <div class="popular-description">Roupas urbanas e de estilo moderno</div>
+                        <div class="popular-stats">
+                            <span class="product-count">156 produtos</span>
+                            <span class="trending-badge">Popular</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popular-card">
+                    <div class="popular-image">⌚</div>
+                    <div class="popular-info">
+                        <div class="popular-name">Smartwatches</div>
+                        <div class="popular-description">Relógios inteligentes e acessórios tech</div>
+                        <div class="popular-stats">
+                            <span class="product-count">45 produtos</span>
+                            <span class="trending-badge">Tech</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Digital Store</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Informação</h3>
+                    <ul>
+                        <li><a href="#">Sobre Drip Store</a></li>
+                        <li><a href="#">Segurança</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Trabalhe conosco</a></li>
+                        <li><a href="#">Meus Pedidos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categorias</h3>
+                    <ul>
+                        <li><a href="#">Camisetas</a></li>
+                        <li><a href="#">Calças</a></li>
+                        <li><a href="#">Bonés</a></li>
+                        <li><a href="#">Headphones</a></li>
+                        <li><a href="#">Tênis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Av. Santos Dumont, 1510 - 1 andar - Aldeota, Fortaleza - CE, 60150-161</p>
+                    <p>(85) 3051-3411</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2022 Digital College</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Category navigation
+        function goToCategory(category) {
+            // In a real app, this would filter products by category
+            window.location.href = `produtos.html?categoria=${category}`;
+        }
+
+        // Card hover effects
+        document.querySelectorAll('.category-card, .subcategory-item, .popular-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-12px)';
+                card.style.boxShadow = '0 20px 50px rgba(0,0,0,0.2)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(-8px)';
+                card.style.boxShadow = '0 12px 40px rgba(0,0,0,0.15)';
+            });
+        });
+
+        // Search functionality
+        function performSearch() {
+            const searchTerm = document.querySelector('.search-input').value.trim();
+            if (searchTerm) {
+                window.location.href = `produtos.html?busca=${encodeURIComponent(searchTerm)}`;
+            }
+        }
+
+        document.querySelector('.search-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        document.querySelector('.search-btn').addEventListener('click', () => {
+            performSearch();
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for scroll animations
+        document.querySelectorAll('.category-card, .subcategory-item, .popular-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

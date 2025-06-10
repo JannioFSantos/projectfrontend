@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tênis Nike Revolution 6 Next Nature Masculino - Digital Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #ffffff;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #c2185b;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "📱";
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+            background: #f9fafb;
+        }
+
+        .search-input:focus {
+            border-color: #c2185b;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #6b7280;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-outline:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+
+        .btn-primary {
+            background: #c2185b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ad1457;
+        }
+
+        .cart-icon {
+            position: relative;
+            color: #6b7280;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #c2185b;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .nav {
+            background: white;
+            padding: 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 20px 30px;
+            text-decoration: none;
+            color: #6b7280;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: #c2185b;
+            border-bottom-color: #c2185b;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            background: #f8fafc;
+        }
+
+        .breadcrumb-list {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+            font-size: 14px;
+        }
+
+        .breadcrumb-list li {
+            color: #6b7280;
+        }
+
+        .breadcrumb-list li:not(:last-child)::after {
+            content: "/";
+            margin-left: 8px;
+            color: #9ca3af;
+        }
+
+        .breadcrumb-list a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+
+        .breadcrumb-list a:hover {
+            color: #c2185b;
+        }
+
+        /* Product Section */
+        .product-section {
+            padding: 40px 0;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        /* Product Gallery */
+        .product-gallery {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            background: #e8e7ff;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-image img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .gallery-nav:hover {
+            background: #f3f4f6;
+        }
+
+        .gallery-nav.prev {
+            left: 20px;
+        }
+
+        .gallery-nav.next {
+            right: 20px;
+        }
+
+        .thumbnail-list {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .thumbnail.active {
+            border-color: #c2185b;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Product Info */
+        .product-info h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #111827;
+        }
+
+        .product-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .rating-badge {
+            background: #fbbf24;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .price {
+            margin-bottom: 24px;
+        }
+
+        .current-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .old-price {
+            color: #9ca3af;
+            text-decoration: line-through;
+            font-size: 18px;
+            margin-left: 12px;
+        }
+
+        .description {
+            margin-bottom: 32px;
+        }
+
+        .description h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #111827;
+        }
+
+        .description p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Size Selection */
+        .size-selection {
+            margin-bottom: 24px;
+        }
+
+        .size-selection h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #111827;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .size-option {
+            width: 48px;
+            height: 48px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .size-option:hover {
+            border-color: #c2185b;
+        }
+
+        .size-option.active {
+            background: #c2185b;
+            color: white;
+            border-color: #c2185b;
+        }
+
+        /* Color Selection */
+        .color-selection {
+            margin-bottom: 32px;
+        }
+
+        .color-selection h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #111827;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 12px;
+        }
+
+        .color-option {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .color-option.active {
+            border-color: #111827;
+        }
+
+        .color-option.cyan { background: #06b6d4; }
+        .color-option.red { background: #ef4444; }
+        .color-option.gray { background: #6b7280; }
+        .color-option.blue { background: #3b82f6; }
+
+        /* Buy Button */
+        .buy-button {
+            width: 100%;
+            padding: 16px;
+            background: #ff8c00;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .buy-button:hover {
+            background: #e67e00;
+        }
+
+        /* Related Products */
+        .related-products {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .related-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .related-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .view-all-link {
+            color: #c2185b;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            position: relative;
+            padding: 30px;
+            background: #f8fafc;
+            text-align: center;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-discount {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #10b981;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .product-card-info {
+            padding: 24px;
+        }
+
+        .product-brand {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #111827;
+            font-size: 16px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .product-current-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .product-old-price {
+            color: #9ca3af;
+            text-decoration: line-through;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #111827;
+            color: white;
+            padding: 80px 0 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 24px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            color: #9ca3af;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #c2185b;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            background: #374151;
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .search-container {
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 20px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Digital Store</a>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Pesquisar produto..." value="Tênis">
+                    <button class="search-btn">🔍</button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="btn btn-outline">Cadastre-se</a>
+                    <a href="#" class="btn btn-primary">Entrar</a>
+                    <div class="cart-icon">
+                        🛒
+                        <span class="cart-badge">2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="active">Produtos</a></li>
+                <li><a href="categorias.html">Categorias</a></li>
+                <li><a href="meus-pedidos.html">Meus Pedidos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Produtos</a></li>
+                <li><a href="#">Tênis</a></li>
+                <li><a href="#">Nike</a></li>
+                <li>Tênis Nike Revolution 6 Next Nature Masculino</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="product-section">
+        <div class="container">
+            <div class="product-container">
+                <!-- Product Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="/home-slide-1.jpeg" alt="Tênis Nike Revolution" id="main-product-image">
+                        <button class="gallery-nav prev" onclick="previousImage()">‹</button>
+                        <button class="gallery-nav next" onclick="nextImage()">›</button>
+                    </div>
+                    <div class="thumbnail-list">
+                        <div class="thumbnail active" onclick="changeImage(0)">
+                            <img src="/home-slide-1.jpeg" alt="Thumbnail 1">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(1)">
+                            <img src="/home-slide-2.jpeg" alt="Thumbnail 2">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(2)">
+                            <img src="/home-slide-3.jpeg" alt="Thumbnail 3">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(3)">
+                            <img src="/home-slide-4.jpeg" alt="Thumbnail 4">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(4)">
+                            <img src="/home-slide-5.jpeg" alt="Thumbnail 5">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <h1>Tênis Nike Revolution 6 Next Nature Masculino</h1>
+                    
+                    <div class="product-meta">
+                        <span>Casual | Nike | REF:38416711</span>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-badge">4.7★</span>
+                            <span>(90 avaliações)</span>
+                        </div>
+                    </div>
+
+                    <div class="price">
+                        <span class="current-price">R$ 219,00</span>
+                        <span class="old-price">R$ 349,00</span>
+                    </div>
+
+                    <div class="description">
+                        <h3>Descrição do produto</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                    </div>
+
+                    <div class="size-selection">
+                        <h3>Tamanho</h3>
+                        <div class="size-options">
+                            <div class="size-option" onclick="selectSize(this)">39</div>
+                            <div class="size-option" onclick="selectSize(this)">40</div>
+                            <div class="size-option active" onclick="selectSize(this)">41</div>
+                            <div class="size-option" onclick="selectSize(this)">42</div>
+                            <div class="size-option" onclick="selectSize(this)">43</div>
+                        </div>
+                    </div>
+
+                    <div class="color-selection">
+                        <h3>Cor</h3>
+                        <div class="color-options">
+                            <div class="color-option cyan" onclick="selectColor(this)"></div>
+                            <div class="color-option red active" onclick="selectColor(this)"></div>
+                            <div class="color-option gray" onclick="selectColor(this)"></div>
+                            <div class="color-option blue" onclick="selectColor(this)"></div>
+                        </div>
+                    </div>
+
+                    <button class="buy-button" onclick="addToCart()">COMPRAR</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products">
+        <div class="container">
+            <div class="related-header">
+                <h2>Produtos Relacionados</h2>
+                <a href="#" class="view-all-link">Ver todos →</a>
+            </div>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="product-discount">30% OFF</div>
+                        <img src="/product-thumb-1.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-card-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="product-current-price">$100</span>
+                            <span class="product-old-price">$200</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="product-discount">30% OFF</div>
+                        <img src="/product-thumb-2.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-card-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="product-current-price">$100</span>
+                            <span class="product-old-price">$200</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/product-thumb-3.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-card-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="product-current-price">$100</span>
+                            <span class="product-old-price">$200</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/product-thumb-4.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-card-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="product-current-price">$100</span>
+                            <span class="product-old-price">$200</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Digital Store</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Informação</h3>
+                    <ul>
+                        <li><a href="#">Sobre Drip Store</a></li>
+                        <li><a href="#">Segurança</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Trabalhe conosco</a></li>
+                        <li><a href="#">Meus Pedidos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categorias</h3>
+                    <ul>
+                        <li><a href="#">Camisetas</a></li>
+                        <li><a href="#">Calças</a></li>
+                        <li><a href="#">Bonés</a></li>
+                        <li><a href="#">Headphones</a></li>
+                        <li><a href="#">Tênis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Av. Santos Dumont, 1510 - 1 andar - Aldeota, Fortaleza - CE, 60150-161</p>
+                    <p>(85) 3051-3411</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2022 Digital College</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Product gallery functionality
+        const productImages = [
+            '/home-slide-1.jpeg',
+            '/home-slide-2.jpeg',
+            '/home-slide-3.jpeg',
+            '/home-slide-4.jpeg',
+            '/home-slide-5.jpeg'
+        ];
+        
+        let currentImageIndex = 0;
+        const mainImage = document.getElementById('main-product-image');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+
+        function changeImage(index) {
+            currentImageIndex = index;
+            mainImage.src = productImages[index];
+            
+            thumbnails.forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % productImages.length;
+            changeImage(currentImageIndex);
+        }
+
+        function previousImage() {
+            currentImageIndex = (currentImageIndex - 1 + productImages.length) % productImages.length;
+            changeImage(currentImageIndex);
+        }
+
+        // Size selection
+        function selectSize(element) {
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Color selection
+        function selectColor(element) {
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Add to cart functionality
+        function addToCart() {
+            const cartBadge = document.querySelector('.cart-badge');
+            let currentCount = parseInt(cartBadge.textContent);
+            cartBadge.textContent = currentCount + 1;
+            
+            const buyButton = document.querySelector('.buy-button');
+            buyButton.style.background = '#10b981';
+            buyButton.textContent = 'ADICIONADO!';
+            
+            setTimeout(() => {
+                buyButton.style.background = '#ff8c00';
+                buyButton.textContent = 'COMPRAR';
+            }, 1500);
+        }
+
+        // Product card hover effects
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-12px)';
+                card.style.boxShadow = '0 20px 50px rgba(0,0,0,0.2)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(-8px)';
+                card.style.boxShadow = '0 12px 40px rgba(0,0,0,0.15)';
+            });
+        });
+
+        // Search functionality
+        function performSearch() {
+            const searchTerm = document.querySelector('.search-input').value.trim();
+            if (searchTerm) {
+                window.location.href = `produtos.html?busca=${encodeURIComponent(searchTerm)}`;
+            }
+        }
+
+        document.querySelector('.search-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        document.querySelector('.search-btn').addEventListener('click', () => {
+            performSearch();
+        });
+    </script>
+</body>
+</html>

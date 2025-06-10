@@ -1,0 +1,34 @@
+/* Fontes devem vir primeiro */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600&display=swap');
+
+/* Variáveis CSS */
+:root {
+  --primary-color: #2A254B;
+  --secondary-color: #4E4D93;
+  --light-gray: #F9F9F9;
+  --white: #FFFFFF;
+  --border-gray: #EBE8F4;
+  --text-dark: #22202E;
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  color: var(--text-dark);
+  background-color: var(--white);
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+/* Estilos para títulos */
+h1, h2, h3, h4 {
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 600;
+}

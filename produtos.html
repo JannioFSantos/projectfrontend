@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - Digital Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #ffffff;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #c2185b;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "📱";
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+            background: #f9fafb;
+        }
+
+        .search-input:focus {
+            border-color: #c2185b;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #6b7280;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-outline:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+
+        .btn-primary {
+            background: #c2185b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ad1457;
+        }
+
+        .cart-icon {
+            position: relative;
+            color: #6b7280;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #c2185b;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .nav {
+            background: white;
+            padding: 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 20px 30px;
+            text-decoration: none;
+            color: #6b7280;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: #c2185b;
+            border-bottom-color: #c2185b;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            padding: 40px 0;
+        }
+
+        /* Results Header */
+        .results-header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .results-info {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .sort-select {
+            padding: 8px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: white;
+            color: #374151;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Sidebar Filters */
+        .sidebar {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .filter-section {
+            margin-bottom: 30px;
+        }
+
+        .filter-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .filter-option input[type="checkbox"],
+        .filter-option input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #c2185b;
+        }
+
+        .filter-option label {
+            font-size: 14px;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        /* Products Grid */
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            position: relative;
+            padding: 30px;
+            background: #f8fafc;
+            text-align: center;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-discount {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #10b981;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .product-info {
+            padding: 24px;
+        }
+
+        .product-brand {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #111827;
+            font-size: 16px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .current-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .old-price {
+            color: #9ca3af;
+            text-decoration: line-through;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #111827;
+            color: white;
+            padding: 80px 0 40px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 24px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            color: #9ca3af;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #c2185b;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            background: #374151;
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .sidebar {
+                position: static;
+                margin-bottom: 30px;
+            }
+
+            .products-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .search-container {
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 20px;
+            }
+
+            .products-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Digital Store</a>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Pesquisar produto..." value="Tênis">
+                    <button class="search-btn">🔍</button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="btn btn-outline">Cadastre-se</a>
+                    <a href="#" class="btn btn-primary">Entrar</a>
+                    <div class="cart-icon">
+                        🛒
+                        <span class="cart-badge">2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="active">Produtos</a></li>
+                <li><a href="categorias.html">Categorias</a></li>
+                <li><a href="meus-pedidos.html">Meus Pedidos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Results Header -->
+            <div class="results-header">
+                <div class="results-info">
+                    Resultados para "Tênis" - <strong>389 produtos</strong>
+                </div>
+                <select class="sort-select">
+                    <option>Ordernar por: mais relevantes</option>
+                    <option>Menor preço</option>
+                    <option>Maior preço</option>
+                    <option>Mais vendidos</option>
+                    <option>Melhor avaliados</option>
+                </select>
+            </div>
+
+            <!-- Sidebar Filters -->
+            <aside class="sidebar">
+                <div class="filter-section">
+                    <h3 class="filter-title">Filtrar por</h3>
+                </div>
+
+                <div class="filter-section">
+                    <h3 class="filter-title">Marca</h3>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="checkbox" id="adidas" checked>
+                            <label for="adidas">Adidas</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="calenciaga">
+                            <label for="calenciaga">Calenciaga</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="k-swiss" checked>
+                            <label for="k-swiss">K-Swiss</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="nike">
+                            <label for="nike">Nike</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="puma">
+                            <label for="puma">Puma</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3 class="filter-title">Categoria</h3>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="checkbox" id="esporte" checked>
+                            <label for="esporte">Esporte e lazer</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="casual">
+                            <label for="casual">Casual</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="utilitario">
+                            <label for="utilitario">Utilitário</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="corrida">
+                            <label for="corrida">Corrida</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3 class="filter-title">Gênero</h3>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="checkbox" id="masculino" checked>
+                            <label for="masculino">Masculino</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="feminino" checked>
+                            <label for="feminino">Feminino</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="unissex">
+                            <label for="unissex">Unissex</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3 class="filter-title">Estado</h3>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="radio" id="novo" name="estado" checked>
+                            <label for="novo">Novo</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" id="usado" name="estado">
+                            <label for="usado">Usado</label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Products Grid -->
+            <div class="products-container">
+                <!-- Product 1 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <div class="product-discount">30% OFF</div>
+                        <img src="/product-thumb-1.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 2 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <div class="product-discount">30% OFF</div>
+                        <img src="/product-thumb-2.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 3 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <div class="product-discount">30% OFF</div>
+                        <img src="/product-thumb-3.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 4 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/product-thumb-4.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 5 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/product-thumb-5.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 6 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/produc-image-1.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 7 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/produc-image-2.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 8 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/produc-image-3.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 9 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/produc-image-4.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 10 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/produc-image-5.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 11 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/home-slide-1.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 12 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/home-slide-2.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 13 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/home-slide-3.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 14 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/home-slide-4.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Product 15 -->
+                <a href="produto.html" class="product-card">
+                    <div class="product-image">
+                        <img src="/home-slide-5.jpeg" alt="K-Swiss VB">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Tênis</div>
+                        <div class="product-name">K-Swiss VB - Masculino</div>
+                        <div class="product-price">
+                            <span class="old-price">$200</span>
+                            <span class="current-price">$100</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Digital Store</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Informação</h3>
+                    <ul>
+                        <li><a href="#">Sobre Drip Store</a></li>
+                        <li><a href="#">Segurança</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Trabalhe conosco</a></li>
+                        <li><a href="#">Meus Pedidos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categorias</h3>
+                    <ul>
+                        <li><a href="#">Camisetas</a></li>
+                        <li><a href="#">Calças</a></li>
+                        <li><a href="#">Bonés</a></li>
+                        <li><a href="#">Headphones</a></li>
+                        <li><a href="#">Tênis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Av. Santos Dumont, 1510 - 1 andar - Aldeota, Fortaleza - CE, 60150-161</p>
+                    <p>(85) 3051-3411</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2022 Digital College</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+            input.addEventListener('change', function() {
+                // Simulate filtering (in a real app, this would filter the products)
+                console.log('Filter changed:', this.id, this.checked);
+            });
+        });
+
+        // Sort functionality
+        document.querySelector('.sort-select').addEventListener('change', function() {
+            console.log('Sort changed:', this.value);
+            // In a real app, this would sort the products
+        });
+
+        // Product card hover effects
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-12px)';
+                card.style.boxShadow = '0 20px 50px rgba(0,0,0,0.2)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(-8px)';
+                card.style.boxShadow = '0 12px 40px rgba(0,0,0,0.15)';
+            });
+        });
+
+        // Get search parameter from URL
+        function getSearchParam() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('busca') || '';
+        }
+
+        // Update search input with URL parameter
+        const searchParam = getSearchParam();
+        if (searchParam) {
+            document.querySelector('.search-input').value = searchParam;
+            performSearch(searchParam);
+        }
+
+        // Search functionality
+        function performSearch(searchTerm = null) {
+            const term = searchTerm || document.querySelector('.search-input').value.trim();
+            if (term) {
+                // Update URL without reloading page
+                const newUrl = new URL(window.location);
+                newUrl.searchParams.set('busca', term);
+                window.history.pushState({}, '', newUrl);
+                
+                // Filter products
+                filterProducts(term);
+            }
+        }
+
+        function filterProducts(searchTerm) {
+            const products = document.querySelectorAll('.product-card');
+            const searchLower = searchTerm.toLowerCase();
+            let visibleCount = 0;
+
+            products.forEach(product => {
+                const productName = product.querySelector('.product-name')?.textContent.toLowerCase() || '';
+                const productBrand = product.querySelector('.product-brand')?.textContent.toLowerCase() || '';
+                
+                if (productName.includes(searchLower) || productBrand.includes(searchLower) || searchLower === '') {
+                    product.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+
+            // Update results header
+            const resultsInfo = document.querySelector('.results-info');
+            if (resultsInfo) {
+                if (searchTerm) {
+                    resultsInfo.innerHTML = `Resultados para "<strong>${searchTerm}</strong>" - <strong>${visibleCount} produtos</strong>`;
+                } else {
+                    resultsInfo.innerHTML = `Resultados para "Tênis" - <strong>389 produtos</strong>`;
+                }
+            }
+
+            // Show no results message if needed
+            showNoResultsMessage(visibleCount, searchTerm);
+        }
+
+        function showNoResultsMessage(count, searchTerm) {
+            let noResultsDiv = document.querySelector('.no-results');
+            
+            if (count === 0 && searchTerm) {
+                if (!noResultsDiv) {
+                    noResultsDiv = document.createElement('div');
+                    noResultsDiv.className = 'no-results';
+                    noResultsDiv.style.cssText = `
+                        grid-column: 1 / -1;
+                        text-align: center;
+                        padding: 60px 20px;
+                        background: white;
+                        border-radius: 16px;
+                        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+                    `;
+                    noResultsDiv.innerHTML = `
+                        <div style="font-size: 64px; margin-bottom: 20px; opacity: 0.5;">🔍</div>
+                        <h3 style="font-size: 24px; margin-bottom: 12px; color: #111827;">Nenhum produto encontrado</h3>
+                        <p style="color: #6b7280; margin-bottom: 24px;">Não encontramos produtos para "${searchTerm}". Tente buscar por outros termos.</p>
+                        <button onclick="clearSearch()" style="padding: 12px 24px; background: #c2185b; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Ver todos os produtos</button>
+                    `;
+                    document.querySelector('.products-container').appendChild(noResultsDiv);
+                }
+            } else if (noResultsDiv) {
+                noResultsDiv.remove();
+            }
+        }
+
+        function clearSearch() {
+            document.querySelector('.search-input').value = '';
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.delete('busca');
+            window.history.pushState({}, '', newUrl);
+            filterProducts('');
+        }
+
+        // Real-time search as user types
+        document.querySelector('.search-input').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.trim();
+            if (searchTerm.length >= 2) {
+                filterProducts(searchTerm);
+            } else if (searchTerm.length === 0) {
+                clearSearch();
+            }
+        });
+
+        document.querySelector('.search-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        document.querySelector('.search-btn').addEventListener('click', () => {
+            performSearch();
+        });
+    </script>
+</body>
+</html>

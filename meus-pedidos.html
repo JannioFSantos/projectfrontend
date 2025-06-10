@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Pedidos - Digital Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #c2185b;
+            text-decoration: none;
+        }
+
+        .logo::before {
+            content: "📱";
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+            background: #f9fafb;
+        }
+
+        .search-input:focus {
+            border-color: #c2185b;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #6b7280;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-outline:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+
+        .btn-primary {
+            background: #c2185b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ad1457;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+            font-size: 12px;
+            padding: 8px 16px;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        .cart-icon {
+            position: relative;
+            color: #6b7280;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #c2185b;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        .nav {
+            background: white;
+            padding: 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 20px 30px;
+            text-decoration: none;
+            color: #6b7280;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: #c2185b;
+            border-bottom-color: #c2185b;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: white;
+            padding: 40px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .page-description {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        /* Orders Section */
+        .orders-section {
+            padding: 40px 0;
+        }
+
+        .orders-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .orders-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #c2185b;
+            display: block;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            background: #f3f4f6;
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: #6b7280;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .filter-tab.active {
+            background: white;
+            color: #c2185b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Order Cards */
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+
+        .order-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .order-info {
+            display: flex;
+            gap: 30px;
+        }
+
+        .order-detail {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .order-label {
+            color: #9ca3af;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .order-value {
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .order-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-delivered {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-shipping {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-processing {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-cancelled {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .order-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #111827;
+        }
+
+        .item-details {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-icon {
+            font-size: 80px;
+            margin-bottom: 24px;
+            opacity: 0.5;
+        }
+
+        .empty-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #111827;
+        }
+
+        .empty-description {
+            color: #6b7280;
+            margin-bottom: 32px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: #111827;
+            color: white;
+            padding: 80px 0 40px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 24px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            color: #9ca3af;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #c2185b;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            background: #374151;
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .search-container {
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 20px;
+            }
+
+            .orders-header {
+                flex-direction: column;
+                gap: 20px;
+                align-items: stretch;
+            }
+
+            .orders-stats {
+                justify-content: space-around;
+            }
+
+            .order-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+
+            .order-info {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            .order-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">Digital Store</a>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Pesquisar produto...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" class="btn btn-outline">Cadastre-se</a>
+                    <a href="#" class="btn btn-primary">Entrar</a>
+                    <div class="cart-icon">
+                        🛒
+                        <span class="cart-badge">2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="categorias.html">Categorias</a></li>
+                <li><a href="#" class="active">Meus Pedidos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Meus Pedidos</h1>
+            <p class="page-description">Acompanhe todos os seus pedidos e histórico de compras</p>
+        </div>
+    </section>
+
+    <!-- Orders Section -->
+    <section class="orders-section">
+        <div class="container">
+            <div class="orders-header">
+                <div class="orders-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Total de Pedidos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Entregues</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Em Trânsito</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">R$ 2.847</span>
+                        <span class="stat-label">Total Gasto</span>
+                    </div>
+                </div>
+                
+                <div class="filter-tabs">
+                    <button class="filter-tab active" onclick="filterOrders('all')">Todos</button>
+                    <button class="filter-tab" onclick="filterOrders('delivered')">Entregues</button>
+                    <button class="filter-tab" onclick="filterOrders('shipping')">Em Trânsito</button>
+                    <button class="filter-tab" onclick="filterOrders('processing')">Processando</button>
+                </div>
+            </div>
+
+            <div class="orders-list">
+                <!-- Order 1 -->
+                <div class="order-card" data-status="delivered">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <div class="order-detail">
+                                <span class="order-label">Pedido</span>
+                                <span class="order-value">#DG2024001</span>
+                            </div>
+                            <div class="order-detail">
+                                <span class="order-label">Data</span>
+                                <span class="order-value">15 Dez 2024</span>
+                            </div>
+                            <div class="order-detail">
+                                <span class="order-label">Total</span>
+                                <span class="order-value">R$ 219,00</span>
+                            </div>
+                        </div>
+                        <span class="order-status status-delivered">Entregue</span>
+                    </div>
+                    
+                    <div class="order-items">
+                        <div class="order-item">
+                            <div class="item-image">👟</div>
+                            <div class="item-info">
+                                <div class="item-name">Tênis Nike Revolution 6 Next Nature Masculino</div>
+                                <div class="item-details">Cor: Branco/Vermelho | Tamanho: 41</div>
+                                <div class="item-price">R$ 219,00</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-actions">
+                        <button class="btn btn-secondary">Ver Detalhes</button>
+                        <button class="btn btn-secondary">Avaliar Produto</button>
+                        <button class="btn btn-primary">Comprar Novamente</button>
+                    </div>
+                </div>
+
+                <!-- Order 2 -->
+                <div class="order-card" data-status="shipping">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <div class="order-detail">
+                                <span class="order-label">Pedido</span>
+                                <span class="order-value">#DG2024002</span>
+                            </div>
+                            <div class="order-detail">
+                                <span class="order-label">Data</span>
+                                <span class="order-value">20 Dez 2024</span>
+                            </div>
+                            <div class="order-detail">
+                                <span class="order-label">Total</span>
+                                <span class="order-value">R$ 450,00</span>
+                            </div>
+                        </div>
+                        <span class="order-status status-shipping">Em Trânsito</span>
+                    </div>
+                    
+                    <div class="order-items">
+                        <div class="order-item">
+                            <div class="item-image">🎧</div>
+                            <div class="item-info">
+                                <div class="item-name">Headphone Beats Studio Pro</div>
+                                <div class="item-details">Cor: Preto | Wireless</div>
+                                <div class="item-price">R$ 450,00</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-actions">
+                        <button class="btn btn-secondary">Rastrear Pedido</button>
+                        <button class="btn btn-secondary">Ver Detalhes</button>
+                    </div>
+                </div>
+
+                <!-- Order 3 -->
+                <div class="order-card" data-status="delivered">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <div class="order-detail">
+                                <span class="order-label">Pedido</span>
+                                <span class="order-value">#DG2024003</span>
+                            </div>
+                            <div class="order-detail">
+                                <span class="order-label">Data</span>
+                                <span class="order-value">10 Dez 2024</span>
+                            </div>
+                            <div class="order-detail">
+                                <span class="order-label">Total</span>
+                                <span class="order-value">R$ 320,00</span>
+                            </div>
+                        </div>
+                        <span class="order-status status-delivered">Entregue</span>
+                    </div>
+                    
+                    <div class="order-items">
+                        <div class="order-item">
+                            <div class="item-image">👕</div>
+                            <div class="item-info">
+                                <div class="item-name">Camiseta Supreme Box Logo</div>
+                                <div class="item-details">Cor: Branco | Tamanho: M</div>
+                                <div class="item-price">R$ 180,00</div>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="item-image">🧢</div>
+                            <div class="item-info">
+                                <div class="item-name">Boné Nike Dri-FIT</div>
+                                <div class="item-details">Cor: Preto | Ajustável</div>
+                                <div class="item-price">R$ 140,00</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-actions">
+                        <button class="btn btn-secondary">Ver Detalhes</button>
+                        <button class="btn btn-secondary">Avaliar Produtos</button>
+                        <button class="btn btn-primary">Comprar Novamente</button>
+                    </div>
+                </div>
+
+                <!-- Order 4 -->
+                <div class="order-card" data-status="processing">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <div class="order-detail">
+                                <span class="order-label">Pedido</span>
+                                <span class="order-value">#DG2024004</span>
+                            </div>
+                            <div class="order-detail">
+                                <span class="order-label">Data</span>
+                                <span class="order-value">22 Dez 2024</span>
+                            </div>
+                            <div class="order-detail">
+                                <span class="order-label">Total</span>
+                                <span class="order-value">R$ 680,00</span>
+                            </div>
+                        </div>
+                        <span class="order-status status-processing">Processando</span>
+                    </div>
+                    
+                    <div class="order-items">
+                        <div class="order-item">
+                            <div class="item-image">👟</div>
+                            <div class="item-info">
+                                <div class="item-name">Tênis Air Jordan 1 Retro High</div>
+                                <div class="item-details">Cor: Chicago | Tamanho: 42</div>
+                                <div class="item-price">R$ 680,00</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-actions">
+                        <button class="btn btn-secondary">Ver Detalhes</button>
+                        <button class="btn btn-outline">Cancelar Pedido</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Digital Store</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">📷</a>
+                        <a href="#">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Informação</h3>
+                    <ul>
+                        <li><a href="#">Sobre Drip Store</a></li>
+                        <li><a href="#">Segurança</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Trabalhe conosco</a></li>
+                        <li><a href="#">Meus Pedidos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categorias</h3>
+                    <ul>
+                        <li><a href="#">Camisetas</a></li>
+                        <li><a href="#">Calças</a></li>
+                        <li><a href="#">Bonés</a></li>
+                        <li><a href="#">Headphones</a></li>
+                        <li><a href="#">Tênis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Av. Santos Dumont, 1510 - 1 andar - Aldeota, Fortaleza - CE, 60150-161</p>
+                    <p>(85) 3051-3411</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2022 Digital College</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter orders functionality
+        function filterOrders(status) {
+            const tabs = document.querySelectorAll('.filter-tab');
+            const orders = document.querySelectorAll('.order-card');
+            
+            // Update active tab
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter orders
+            orders.forEach(order => {
+                if (status === 'all') {
+                    order.style.display = 'block';
+                } else {
+                    const orderStatus = order.getAttribute('data-status');
+                    order.style.display = orderStatus === status ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Search functionality
+        function performSearch() {
+            const searchTerm = document.querySelector('.search-input').value.trim();
+            if (searchTerm) {
+                window.location.href = `produtos.html?busca=${encodeURIComponent(searchTerm)}`;
+            }
+        }
+
+        document.querySelector('.search-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        document.querySelector('.search-btn').addEventListener('click', () => {
+            performSearch();
+        });
+
+        // Order card hover effects
+        document.querySelectorAll('.order-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+                card.style.boxShadow = '0 12px 40px rgba(0,0,0,0.15)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)';
+            });
+        });
+
+        // Button actions
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if (btn.textContent.includes('Comprar Novamente')) {
+                    e.preventDefault();
+                    alert('Produto adicionado ao carrinho!');
+                } else if (btn.textContent.includes('Rastrear')) {
+                    e.preventDefault();
+                    alert('Código de rastreamento: BR123456789');
+                } else if (btn.textContent.includes('Avaliar')) {
+                    e.preventDefault();
+                    alert('Redirecionando para avaliação...');
+                } else if (btn.textContent.includes('Cancelar')) {
+                    e.preventDefault();
+                    if (confirm('Tem certeza que deseja cancelar este pedido?')) {
+                        alert('Pedido cancelado com sucesso!');
+                    }
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for scroll animations
+        document.querySelectorAll('.order-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

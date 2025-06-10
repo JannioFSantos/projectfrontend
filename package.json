@@ -1,0 +1,33 @@
+{
+  "name": "projeto-digital-store",
+  "version": "1.0.0",
+  "description": "- Com o objetivo de organizar o projeto estruture o projeto de modo que dentro da pasta \"src\" existam as pastas dos componentes chamada `components` e a pasta de paginas chamada `pages`. Na pasta `components` devem ser criados os componentes funcionais do projeto e na `pasta` page deve conter cada aba da pagina da loja `drip-store`, contendo somente a chamada dos componentes criados. Essa organização facilitará a criação de rotas dentro do arquivo `App.js`.",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digitalcollegebr/projeto-digital-store.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/digitalcollegebr/projeto-digital-store/issues"
+  },
+  "homepage": "https://github.com/digitalcollegebr/projeto-digital-store#readme",
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.5.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2",
+    "vite": "^6.3.5"
+  }
+}
