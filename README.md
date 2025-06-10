@@ -1,10 +1,9 @@
 # Digital Store - E-commerce Frontend
 
-Um site de e-commerce moderno e responsivo desenvolvido com HTML, CSS e JavaScript vanilla, baseado no design do Figma da Digital College.
+Um site de e-commerce moderno e responsivo desenvolvido com HTML, CSS e JavaScript, baseado no design do Figma da Digital College.
 
-## 📋 Sobre o Projeto
 
-O Digital Store é uma loja virtual completa de produtos esportivos e lifestyle, com foco em tênis, roupas e acessórios. O projeto foi desenvolvido seguindo as melhores práticas de frontend e design responsivo.
+
 
 ## 🚀 Funcionalidades
 
@@ -59,13 +58,6 @@ O Digital Store é uma loja virtual completa de produtos esportivos e lifestyle,
 3. Será redirecionado para a página de produtos com os resultados
 4. Na página inicial, a busca filtra produtos em tempo real
 
-## 🎨 Design e Layout
-
-### Paleta de Cores
-- **Primária**: #c2185b (Rosa/Magenta)
-- **Secundária**: #6b7280 (Cinza)
-- **Fundo**: #ffffff (Branco)
-- **Texto**: #1f2937 (Cinza Escuro)
 
 ### Tipografia
 - **Fonte Principal**: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
@@ -126,21 +118,6 @@ projeto-digital-store/
     └── ...
 ```
 
-## 🚀 Como Executar
-
-1. **Clone ou baixe o projeto**
-2. **Abra o arquivo `index.html` em um navegador**
-3. **Ou use um servidor local:**
-   ```bash
-   # Com Python
-   python -m http.server 8000
-   
-   # Com Node.js (http-server)
-   npx http-server
-   
-   # Com PHP
-   php -S localhost:8000
-   ```
 
 ## 🔧 Funcionalidades JavaScript
 
@@ -210,25 +187,3 @@ const observer = new IntersectionObserver((entries) => {
 - [x] Lazy loading de elementos
 - [x] Transições suaves
 
-## 🌟 Destaques do Projeto
-
-1. **Design Fiel ao Figma**: Implementação precisa do design fornecido
-2. **Código Limpo**: HTML semântico, CSS organizado, JS modular
-3. **Responsividade Total**: Funciona perfeitamente em todos os dispositivos
-4. **Busca Avançada**: Sistema de busca profissional com múltiplas funcionalidades
-5. **Interatividade Rica**: Animações, transições e feedback visual
-6. **Navegação Fluida**: SPA-like experience com JavaScript
-
-## 📞 Contato
-
-**Digital College**
-- Endereço: Av. Santos Dumont, 1510 - 1 andar - Aldeota, Fortaleza - CE, 60150-161
-- Telefone: (85) 3051-3411
-
-## 📄 Licença
-
-© 2022 Digital College - Todos os direitos reservados.
-
----
-
-**Desenvolvido com ❤️ seguindo as melhores práticas de frontend**
