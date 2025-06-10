@@ -2,7 +2,7 @@
 
 Um site de e-commerce moderno e responsivo desenvolvido com HTML, CSS e JavaScript, baseado no design do Figma da Digital College.
 
-
+https://janniofsantos.github.io/projectfrontend/
 
 
 ## 🚀 Funcionalidades
