@@ -4,6 +4,19 @@ Um site de e-commerce moderno e responsivo desenvolvido com HTML, CSS e JavaScri
 
 https://janniofsantos.github.io/projectfrontend/
 
+contem erro no deploy github pages
+Home
+![alt text](image.png)
+
+Produtos
+![alt text](image-1.png)
+
+Catergoria
+![alt text](image-2.png)
+
+Meus pedidos
+![alt text](image-3.png)
+
 
 ## 🚀 Funcionalidades
 
